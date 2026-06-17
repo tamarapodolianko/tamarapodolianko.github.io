@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tamara Podolianko — CV</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink: #1a1814;
+  --warm: #2c2820;
+  --mid: #6b6560;
+  --pale: #b8b0a8;
+  --cream: #f7f4f0;
+  --parchment: #ede8e1;
+  --accent: #8b6f47;
+  --gold: #c9a96e;
+  --line: #e2ddd7;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Jost', sans-serif;
+  background: #e8e3dc;
+  padding: 40px 20px;
+  cursor: none;
+}
+
+/* Cursor */
+.cursor { position: fixed; width: 8px; height: 8px; background: var(--ink); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); }
+.cursor-ring { position: fixed; width: 32px; height: 32px; border: 1px solid var(--accent); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); opacity: 0.6; transition: left 0.06s ease-out, top 0.06s ease-out; }
+
+/* Back link */
+.back-bar {
+  width: 794px;
+  max-width: 100%;
+  margin: 0 auto 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.back-link {
+  font-size: 9px; font-weight: 400; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--mid); text-decoration: none; transition: color 0.2s; cursor: none;
+}
+.back-link:hover { color: var(--accent); }
+
+.download-btn {
+  font-size: 9px; font-weight: 400; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--accent); background: var(--cream); border: 1px solid var(--gold);
+  padding: 8px 20px; cursor: none; font-family: 'Jost', sans-serif;
+  transition: all 0.2s; text-decoration: none;
+}
+.download-btn:hover { background: var(--parchment); color: var(--ink); }
+
+/* Page */
+.page {
+  width: 794px;
+  max-width: 100%;
+  margin: 0 auto;
+  background: var(--cream);
+  position: relative;
+}
+
+.page::before { content: ''; position: absolute; top: 0; left: 0; width: 100px; height: 100px; border-top: 1px solid var(--gold); border-left: 1px solid var(--gold); pointer-events: none; }
+.page::after { content: ''; position: absolute; bottom: 0; right: 0; width: 100px; height: 100px; border-bottom: 1px solid var(--gold); border-right: 1px solid var(--gold); pointer-events: none; }
+
+/* Header */
+.header { display: flex; flex-direction: row; justify-content: space-between; align-items: flex-end; padding: 40px 56px 0 56px; gap: 32px; }
+.name-block { flex: 1; }
+.name { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: 52px; line-height: 1; letter-spacing: -0.5px; color: var(--ink); }
+.name span { font-weight: 500; }
+.job-title { font-size: 9px; font-weight: 200; letter-spacing: 5px; text-transform: uppercase; color: var(--accent); margin-top: 8px; }
+.contact-block { text-align: right; padding-bottom: 4px; }
+.contact-block a, .contact-block p { display: block; font-size: 11px; font-weight: 300; letter-spacing: 0.5px; color: var(--mid); text-decoration: none; line-height: 1.9; }
+.contact-block a:hover { color: var(--accent); }
+
+.header-rule { margin: 24px 56px 0; height: 1px; background: linear-gradient(to right, var(--gold), var(--parchment)); }
+
+/* Body */
+.body { display: flex; flex-direction: row; align-items: flex-start; padding: 0 56px 52px; }
+
+/* Sidebar */
+.sidebar { width: 200px; min-width: 200px; padding: 36px 32px 0 0; border-right: 1px solid var(--parchment); }
+.sidebar-section { margin-bottom: 24px; }
+.sidebar-label { font-size: 9px; font-weight: 500; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; border-bottom: 1px solid var(--parchment); padding-bottom: 4px; }
+.skill-item { font-size: 12.5px; font-weight: 400; color: var(--warm); line-height: 2; }
+.software-item { font-size: 12px; font-weight: 300; color: var(--mid); line-height: 2; }
+.lang-item { font-size: 12.5px; font-weight: 400; color: var(--warm); line-height: 2; }
+.profile-text { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 14px; line-height: 1.7; color: var(--mid); font-weight: 400; }
+
+/* Main */
+.main { flex: 1; min-width: 0; padding: 36px 0 0 36px; }
+.section { margin-bottom: 24px; }
+.section-label { font-size: 9px; font-weight: 500; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; display: flex; align-items: center; gap: 12px; }
+.section-label::after { content: ''; flex: 1; height: 1px; background: var(--parchment); }
+
+/* Experience */
+.exp-entry { display: grid; grid-template-columns: 110px 1fr; gap: 0 20px; margin-bottom: 14px; }
+.exp-entry + .exp-entry { padding-top: 14px; border-top: 1px solid var(--parchment); }
+.exp-date { font-size: 11px; font-weight: 500; letter-spacing: 1px; color: var(--accent); text-transform: uppercase; line-height: 1.6; }
+.exp-place { font-size: 11px; font-weight: 300; color: var(--pale); line-height: 1.6; margin-top: 2px; }
+.exp-role { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+.exp-desc { font-size: 12px; font-weight: 400; color: var(--mid); line-height: 1.8; margin-top: 4px; }
+
+/* Education */
+.edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 24px; }
+.edu-date { font-size: 11px; letter-spacing: 1px; color: var(--accent); text-transform: uppercase; font-weight: 500; }
+.edu-degree { font-family: 'Cormorant Garamond', serif; font-size: 15px; font-weight: 600; color: var(--ink); margin-top: 3px; line-height: 1.3; }
+.edu-school { font-size: 11px; font-weight: 300; color: var(--mid); margin-top: 3px; line-height: 1.5; }
+
+/* Links */
+.links-row { display: flex; gap: 24px; flex-wrap: wrap; }
+.link-label { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--pale); font-weight: 500; }
+.link-item a { display: block; font-size: 11px; font-weight: 300; color: var(--accent); text-decoration: none; margin-top: 3px; }
+.link-item a:hover { color: var(--ink); }
+
+@media (max-width: 600px) {
+  .header { flex-direction: column; padding: 32px 24px 0; }
+  .contact-block { text-align: left; }
+  .body { flex-direction: column; padding: 0 24px 40px; }
+  .sidebar { width: 100%; min-width: unset; padding: 24px 0 0; border-right: none; border-bottom: 1px solid var(--parchment); margin-bottom: 24px; }
+  .main { padding: 24px 0 0; }
+  .header-rule { margin: 20px 24px 0; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<div class="back-bar">
+  <a href="/" class="back-link">← Back to home</a>
+  <a href="/Tamara_Podolianko_CV.pdf" class="download-btn" download>↓ Download PDF</a>
+</div>
+
+<div class="page">
+
+  <div class="header">
+    <div class="name-block">
+      <h1 class="name">Tamara <span>Podolianko</span></h1>
+      <p class="job-title">Senior Interior Designer &nbsp;·&nbsp; CG Artist &nbsp;·&nbsp; Design Lead</p>
+    </div>
+    <div class="contact-block">
+      <a href="mailto:podolianko13@gmail.com">podolianko13@gmail.com</a>
+      <a href="https://behance.net/podolianko13" target="_blank">behance.net/podolianko13</a>
+      <a href="https://linkedin.com/in/tamara-podolianko188b38116" target="_blank">linkedin.com/in/tamara-podolianko</a>
+      <a href="https://instagram.com/tomas_pod_design" target="_blank">@tomas_pod_design</a>
+    </div>
+  </div>
+
+  <div class="header-rule"></div>
+
+  <div class="body">
+    <aside class="sidebar">
+
+      <div class="sidebar-section">
+        <p class="sidebar-label">Profile</p>
+        <p class="profile-text">10+ years leading full-cycle interior design projects across three countries. A precise, detail-driven approach combined with a unique international perspective — from concept through to final realization.</p>
+      </div>
+
+      <div class="sidebar-section">
+        <p class="sidebar-label">Expertise</p>
+        <p class="skill-item">Space Planning</p>
+        <p class="skill-item">3D Visualization & CG</p>
+        <p class="skill-item">Project Management</p>
+        <p class="skill-item">Team Leadership</p>
+        <p class="skill-item">Client Relations</p>
+        <p class="skill-item">FF&E Specification</p>
+        <p class="skill-item">Building Codes</p>
+      </div>
+
+      <div class="sidebar-section">
+        <p class="sidebar-label">Software</p>
+        <p class="software-item">Autodesk 3ds Max</p>
+        <p class="software-item">Corona Render</p>
+        <p class="software-item">Autodesk AutoCAD</p>
+        <p class="software-item">Revit</p>
+        <p class="software-item">ArchiCAD</p>
+        <p class="software-item">SketchUp</p>
+        <p class="software-item">Adobe Photoshop</p>
+        <p class="software-item">Adobe Illustrator</p>
+        <p class="software-item">CRM Platforms</p>
+      </div>
+
+      <div class="sidebar-section">
+        <p class="sidebar-label">Languages</p>
+        <p class="lang-item">English — Fluent</p>
+        <p class="lang-item">Ukrainian — Native</p>
+        <p class="lang-item">Italian — Basic</p>
+        <p class="lang-item">Chinese — Basic</p>
+      </div>
+
+    </aside>
+
+    <main class="main">
+
+      <section class="section">
+        <p class="section-label">Experience</p>
+
+        <div class="exp-entry">
+          <div class="exp-meta">
+            <p class="exp-date">2024 — Now</p>
+            <p class="exp-place">EH Interiors<br>Pennsylvania, US</p>
+          </div>
+          <div class="exp-content">
+            <p class="exp-role">Senior Interior Designer</p>
+            <p class="exp-desc">Leading end-to-end design projects with full responsibility for concept development, client management, and on-site realization. Overseeing cross-functional project teams and ensuring delivery to the highest quality standards.</p>
+          </div>
+        </div>
+
+        <div class="exp-entry">
+          <div class="exp-meta">
+            <p class="exp-date">2023 — 2024</p>
+            <p class="exp-place">ANYIN<br>China</p>
+          </div>
+          <div class="exp-content">
+            <p class="exp-role">Lead Interior Designer</p>
+            <p class="exp-desc">Directed full project lifecycle and managed a design team on large-scale interior projects. Responsible for design direction, client presentations, vendor coordination, and implementation oversight across multiple simultaneous projects.</p>
+          </div>
+        </div>
+
+        <div class="exp-entry">
+          <div class="exp-meta">
+            <p class="exp-date">2022 — 2023</p>
+            <p class="exp-place">Freelance<br>Worldwide</p>
+          </div>
+          <div class="exp-content">
+            <p class="exp-role">Senior Interior Designer & CG Artist</p>
+            <p class="exp-desc">Independent design practice serving international clients across residential and commercial sectors. Delivered complete design packages including concept, visualization, technical drawings, and remote project management.</p>
+          </div>
+        </div>
+
+        <div class="exp-entry">
+          <div class="exp-meta">
+            <p class="exp-date">2020 — 2022</p>
+            <p class="exp-place">Studio Mastersky<br>Ukraine</p>
+          </div>
+          <div class="exp-content">
+            <p class="exp-role">Interior Designer & CG Artist</p>
+            <p class="exp-desc">Managed design projects from brief through realization, including client-facing presentations, 3D visualization, and on-site implementation management.</p>
+          </div>
+        </div>
+
+        <div class="exp-entry">
+          <div class="exp-meta">
+            <p class="exp-date">2018 — 2020</p>
+            <p class="exp-place">PAINT IT<br>Ukraine</p>
+          </div>
+          <div class="exp-content">
+            <p class="exp-role">Interior & Exterior Designer, CG Artist</p>
+            <p class="exp-desc">Developed interior and exterior design concepts with photorealistic CG visualization. Maintained client relationships and managed project delivery from schematic design through completion.</p>
+          </div>
+        </div>
+
+        <div class="exp-entry">
+          <div class="exp-meta">
+            <p class="exp-date">2017 — 2018</p>
+            <p class="exp-place">SVOYA Studio<br>Ukraine</p>
+          </div>
+          <div class="exp-content">
+            <p class="exp-role">Interior Designer & CG Artist</p>
+            <p class="exp-desc">Created interior design proposals and high-quality 3D visualizations for residential and commercial clients within a leading Ukrainian design studio.</p>
+          </div>
+        </div>
+
+        <div class="exp-entry">
+          <div class="exp-meta">
+            <p class="exp-date">2015 — 2017</p>
+            <p class="exp-place">Tobi Architects<br>Dnipro, Ukraine</p>
+          </div>
+          <div class="exp-content">
+            <p class="exp-role">Interior & Exterior Designer, CG Artist</p>
+            <p class="exp-desc">Contributed to interior and exterior design projects alongside experienced architects. Developed strong technical drawing, spatial planning, and visualization skills.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <p class="section-label">Education</p>
+        <div class="edu-grid">
+          <div class="edu-entry">
+            <p class="edu-date">2014 — 2016</p>
+            <p class="edu-degree">Master of Architecture</p>
+            <p class="edu-school">Prydniprovska State Academy of Civil Engineering and Architecture</p>
+          </div>
+          <div class="edu-entry">
+            <p class="edu-date">2012 — 2014</p>
+            <p class="edu-degree">Bachelor of Architecture</p>
+            <p class="edu-school">Prydniprovska State Academy of Civil Engineering and Architecture</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <p class="section-label">Portfolio & Links</p>
+        <div class="links-row">
+          <div class="link-item">
+            <p class="link-label">Portfolio</p>
+            <a href="/portfolio">tamarapodolianko.github.io/portfolio</a>
+          </div>
+          <div class="link-item">
+            <p class="link-label">Behance</p>
+            <a href="https://behance.net/podolianko13" target="_blank">behance.net/podolianko13</a>
+          </div>
+          <div class="link-item">
+            <p class="link-label">LinkedIn</p>
+            <a href="https://linkedin.com/in/tamara-podolianko188b38116" target="_blank">tamara-podolianko</a>
+          </div>
+          <div class="link-item">
+            <p class="link-label">Email</p>
+            <a href="mailto:podolianko13@gmail.com">podolianko13@gmail.com</a>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<script>
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+document.addEventListener('mousemove', e => {
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top = e.clientY + 'px';
+  ring.style.left = e.clientX + 'px';
+  ring.style.top = e.clientY + 'px';
+});
+</script>
+</body>
+</html>
