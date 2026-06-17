@@ -353,7 +353,7 @@ const projects = [
 function getImages(project) {
   const imgs = [];
   for (let i = 1; i <= project.count; i++) {
-    imgs.push(`${project.folder}/${i}.jpg`);
+    imgs.push(`../${project.folder}/${i}.jpg`);
   }
   return imgs;
 }
