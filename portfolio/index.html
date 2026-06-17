@@ -527,26 +527,27 @@ function buildSlides() {
     });
     slide.appendChild(strip);
 
-    // Info panel
-    slide.innerHTML += `
-      <div class="info-panel">
-        <div class="info-top">
-          <span class="project-counter" id="counter-${i}">1 / ${p.count}</span>
-          <div class="nav-arrows">
-            <button class="arrow-btn" onclick="prevProject()">←</button>
-            <button class="arrow-btn" onclick="nextProject()">→</button>
-          </div>
-        </div>
-        <div class="project-title">${p.title}</div>
-        <div class="project-meta">
-          <span class="meta-item">${p.location}</span>
-          <span class="meta-dot">·</span>
-          <span class="meta-item">${p.year}</span>
-          <span class="meta-dot">·</span>
-          <span class="meta-item">${p.type}</span>
+    // Info panel - use createElement instead of innerHTML+= to preserve strip click handlers
+    const infoPanel = document.createElement('div');
+    infoPanel.className = 'info-panel';
+    infoPanel.innerHTML = `
+      <div class="info-top">
+        <span class="project-counter" id="counter-${i}">1 / ${p.count}</span>
+        <div class="nav-arrows">
+          <button class="arrow-btn" onclick="prevProject()">←</button>
+          <button class="arrow-btn" onclick="nextProject()">→</button>
         </div>
       </div>
+      <div class="project-title">${p.title}</div>
+      <div class="project-meta">
+        <span class="meta-item">${p.location}</span>
+        <span class="meta-dot">·</span>
+        <span class="meta-item">${p.year}</span>
+        <span class="meta-dot">·</span>
+        <span class="meta-item">${p.type}</span>
+      </div>
     `;
+    slide.appendChild(infoPanel);
 
     container.appendChild(slide);
   });
