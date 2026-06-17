@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tamara Podolianko — Senior Interior Designer</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink: #18160f;
+  --mid: #6e6a63;
+  --pale: #b5b0a8;
+  --off: #f8f6f3;
+  --parchment: #ede8e1;
+  --accent: #9a7d56;
+  --gold: #c4a46b;
+  --line: #e2ddd7;
+}
+
+html, body {
+  width: 100%; min-height: 100vh;
+  font-family: 'Jost', sans-serif;
+  background: var(--off);
+  color: var(--ink);
+  cursor: none;
+}
+
+/* Custom cursor */
+.cursor { position: fixed; width: 8px; height: 8px; background: var(--ink); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); }
+.cursor-ring { position: fixed; width: 32px; height: 32px; border: 1px solid var(--accent); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); opacity: 0.6; transition: left 0.06s ease-out, top 0.06s ease-out; }
+
+/* Layout */
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 40px;
+  position: relative;
+}
+
+/* Corner marks */
+.page::before { content: ''; position: absolute; top: 32px; left: 32px; width: 80px; height: 80px; border-top: 1px solid var(--gold); border-left: 1px solid var(--gold); }
+.page::after { content: ''; position: absolute; bottom: 32px; right: 32px; width: 80px; height: 80px; border-bottom: 1px solid var(--gold); border-right: 1px solid var(--gold); }
+
+/* Name */
+.name {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(52px, 9vw, 96px);
+  line-height: 0.95;
+  color: var(--ink);
+  text-align: center;
+  letter-spacing: -0.5px;
+}
+.name span { display: block; font-weight: 500; font-style: italic; }
+
+/* Rule */
+.rule { width: 1px; height: 52px; background: linear-gradient(to bottom, var(--gold), transparent); margin: 32px auto; }
+
+/* Title */
+.title {
+  font-size: 9px;
+  font-weight: 300;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--pale);
+  text-align: center;
+}
+
+/* Navigation links */
+.nav {
+  display: flex;
+  gap: 2px;
+  margin-top: 52px;
+}
+
+.nav-link {
+  display: block;
+  padding: 18px 40px;
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.3s;
+  cursor: none;
+}
+
+.nav-link.primary {
+  background: var(--ink);
+  color: var(--off);
+  border: 1px solid var(--ink);
+}
+.nav-link.primary:hover { background: var(--accent); border-color: var(--accent); }
+
+.nav-link.secondary {
+  background: transparent;
+  color: var(--mid);
+  border: 1px solid var(--line);
+}
+.nav-link.secondary:hover { border-color: var(--gold); color: var(--ink); }
+
+/* Contact strip */
+.contact-strip {
+  display: flex;
+  gap: 32px;
+  margin-top: 52px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.contact-item {
+  font-size: 9px;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  color: var(--pale);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.contact-item:hover { color: var(--accent); }
+
+.contact-dot { color: var(--line); font-size: 9px; align-self: center; }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<div class="page">
+  <h1 class="name">Tamara<span>Podolianko</span></h1>
+  <div class="rule"></div>
+  <p class="title">Senior Interior Designer &nbsp;·&nbsp; CG Artist &nbsp;·&nbsp; Master of Architecture</p>
+
+  <nav class="nav">
+    <a href="/portfolio" class="nav-link primary">Portfolio</a>
+    <a href="/cv" class="nav-link secondary">Curriculum Vitae</a>
+  </nav>
+
+  <div class="contact-strip">
+    <a href="mailto:podolianko13@gmail.com" class="contact-item">podolianko13@gmail.com</a>
+    <span class="contact-dot">·</span>
+    <a href="https://behance.net/podolianko13" target="_blank" class="contact-item">Behance</a>
+    <span class="contact-dot">·</span>
+    <a href="https://linkedin.com/in/tamara-podolianko188b38116" target="_blank" class="contact-item">LinkedIn</a>
+    <span class="contact-dot">·</span>
+    <a href="https://instagram.com/tomas_pod_design" target="_blank" class="contact-item">Instagram</a>
+  </div>
+</div>
+
+<script>
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+document.addEventListener('mousemove', e => {
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top = e.clientY + 'px';
+  ring.style.left = e.clientX + 'px';
+  ring.style.top = e.clientY + 'px';
+});
+</script>
+</body>
+</html>
