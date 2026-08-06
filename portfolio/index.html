@@ -246,9 +246,7 @@ html, body {
   html, body { cursor: auto; }
   .cursor, .cursor-ring { display: none; }
 
-  #app {
-    grid-template-columns: 1fr;
-  }
+  #app { grid-template-columns: 1fr; }
 
   .menu-toggle { display: block; }
 
@@ -281,35 +279,12 @@ html, body {
     background: var(--ink);
   }
 
-  .image-strip {
-    bottom: 70px;
-    left: 12px;
-    gap: 4px;
-  }
-
-  .strip-thumb {
-    width: 44px;
-    height: 32px;
-  }
-
-  .info-panel {
-    padding: 14px 16px 18px;
-  }
-
-  .project-title {
-    font-size: 22px;
-  }
-
-  .top-bar {
-    padding: 14px 16px;
-    padding-left: 100px;
-  }
-
-  .arrow-btn {
-    width: 40px; height: 40px;
-    font-size: 18px;
-  }
-
+  .image-strip { bottom: 70px; left: 12px; gap: 4px; }
+  .strip-thumb { width: 44px; height: 32px; }
+  .info-panel { padding: 14px 16px 18px; }
+  .project-title { font-size: 22px; }
+  .top-bar { padding: 14px 16px; padding-left: 100px; }
+  .arrow-btn { width: 40px; height: 40px; font-size: 18px; }
   .intro-name { font-size: clamp(36px, 12vw, 60px); }
 }
 </style>
@@ -360,89 +335,22 @@ html, body {
 </div>
 
 <script>
-// ── PROJECTS DATA ──
-// All image paths point to your local images/ folder
-// Format: images/folder-name/01.jpg
 const projects = [
-  {
-    id: 1,
-    title: 'Waterfall',
-    location: 'Europe',
-    year: '2021',
-    type: 'Residential',
-    folder: 'waterfall',
-    count: 10
-  },
-  {
-    id: 2,
-    title: 'Infinity',
-    location: 'Europe',
-    year: '2021',
-    type: 'Residential',
-    folder: 'infinity',
-    count: 10
-  },
-  {
-    id: 3,
-    title: 'Skyline',
-    location: 'Europe',
-    year: '2022',
-    type: 'Residential',
-    folder: 'skyline',
-    count: 10
-  },
-  {
-    id: 4,
-    title: 'Lei',
-    location: 'Europe',
-    year: '2022',
-    type: 'Residential',
-    folder: 'lei',
-    count: 10
-  },
-  {
-    id: 5,
-    title: 'Furs Class',
-    location: 'Philippines',
-    year: '2023',
-    type: 'Commercial',
-    folder: 'furs-class',
-    count: 10
-  },
-  {
-    id: 6,
-    title: 'Office',
-    location: 'Philippines',
-    year: '2024',
-    type: 'Commercial',
-    folder: 'office',
-    count: 10
-  },
-  {
-    id: 7,
-    title: 'Sun Apartment',
-    location: 'USA',
-    year: '2025',
-    type: 'Residential',
-    folder: 'sun-apartment',
-    count: 10
-  },
-  {
-    id: 8,
-    title: 'Drawings',
-    location: 'Worldwide',
-    year: '2021–2026',
-    type: 'Technical Drawing',
-    folder: 'drawings',
-    count: 10
-  }
+  { id:1, title:'Waterfall',     location:'Europe',      year:'2021',      type:'Residential',       folder:'waterfall',     count:10 },
+  { id:2, title:'Infinity',      location:'Europe',      year:'2021',      type:'Residential',       folder:'infinity',      count:10 },
+  { id:3, title:'Skyline',       location:'Europe',      year:'2022',      type:'Residential',       folder:'skyline',       count:10 },
+  { id:4, title:'Lei',           location:'Europe',      year:'2022',      type:'Residential',       folder:'lei',           count:10 },
+  { id:5, title:'Furs Class',    location:'Philippines', year:'2023',      type:'Commercial',        folder:'furs-class',    count:10 },
+  { id:6, title:'Office',        location:'Philippines', year:'2024',      type:'Commercial',        folder:'office',        count:10 },
+  { id:7, title:'Sun Apartment', location:'USA',         year:'2025',      type:'Residential',       folder:'sun-apartment', count:10 },
+  { id:8, title:'Drawings',      location:'Worldwide',   year:'2021–2026', type:'Technical Drawing', folder:'drawings',      count:10 }
 ];
 
-// Build image paths from folder and count
+// ── FIX: removed leading slash so paths are relative to portfolio/ folder ──
 function getImages(project) {
   const imgs = [];
   for (let i = 1; i <= project.count; i++) {
-    imgs.push(`/${project.folder}/${i}.jpg`);
+    imgs.push(`${project.folder}/${i}.jpg`);
   }
   return imgs;
 }
@@ -499,7 +407,6 @@ function buildSlides() {
     slide.className = 'project-slide';
     slide.id = 'slide-' + i;
 
-    // Main image
     const wrap = document.createElement('div');
     wrap.className = 'main-image-wrap';
     const mainImg = document.createElement('img');
@@ -510,7 +417,6 @@ function buildSlides() {
     wrap.appendChild(mainImg);
     slide.appendChild(wrap);
 
-    // Strip
     const strip = document.createElement('div');
     strip.className = 'image-strip';
     strip.id = 'strip-' + i;
@@ -527,7 +433,6 @@ function buildSlides() {
     });
     slide.appendChild(strip);
 
-    // Info panel - use createElement instead of innerHTML+= to preserve strip click handlers
     const infoPanel = document.createElement('div');
     infoPanel.className = 'info-panel';
     infoPanel.innerHTML = `
@@ -548,7 +453,6 @@ function buildSlides() {
       </div>
     `;
     slide.appendChild(infoPanel);
-
     container.appendChild(slide);
   });
 }
@@ -587,22 +491,16 @@ function goToProject(idx) {
   document.getElementById('progressFill').style.width = ((idx + 1) / projects.length * 100) + '%';
   document.getElementById('slideLabel').textContent = 'Project ' + String(idx + 1).padStart(2, '0');
 
-  // Scroll nav item into view
   if (navItem) navItem.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-
-  // Close mobile sidebar after selection
   closeSidebar();
 }
 
 function nextProject() { goToProject((currentProject + 1) % projects.length); }
 function prevProject() { goToProject((currentProject - 1 + projects.length) % projects.length); }
 
-// Mobile sidebar
 function toggleSidebar() {
-  const sidebar = document.getElementById('sidebar');
-  const overlay = document.getElementById('overlay');
-  sidebar.classList.toggle('open');
-  overlay.classList.toggle('show');
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('show');
 }
 
 function closeSidebar() {
@@ -610,7 +508,6 @@ function closeSidebar() {
   document.getElementById('overlay').classList.remove('show');
 }
 
-// Keyboard
 document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight' || e.key === 'ArrowDown') nextProject();
   if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') prevProject();
