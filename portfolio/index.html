@@ -7,120 +7,31 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 :root {
-  --white: #ffffff;
-  --off: #f8f6f3;
-  --paper: #f0ece6;
-  --ink: #18160f;
-  --mid: #6e6a63;
-  --pale: #b5b0a8;
-  --accent: #9a7d56;
-  --gold: #c4a46b;
-  --line: #e2ddd7;
+  --white: #ffffff; --off: #f8f6f3; --paper: #f0ece6;
+  --ink: #18160f; --mid: #6e6a63; --pale: #b5b0a8;
+  --accent: #9a7d56; --gold: #c4a46b; --line: #e2ddd7;
 }
-
-html, body {
-  width: 100%; height: 100%;
-  overflow: hidden;
-  font-family: 'Jost', sans-serif;
-  background: var(--off);
-  color: var(--ink);
-  cursor: none;
-}
-
-/* ── CURSOR ── */
-.cursor {
-  position: fixed;
-  width: 8px; height: 8px;
-  background: var(--ink);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-  transition: width 0.3s, height 0.3s;
-}
-.cursor-ring {
-  position: fixed;
-  width: 32px; height: 32px;
-  border: 1px solid var(--accent);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9998;
-  transform: translate(-50%, -50%);
-  transition: left 0.06s ease-out, top 0.06s ease-out;
-  opacity: 0.6;
-}
-
-/* ── INTRO ── */
-#intro {
-  position: fixed;
-  inset: 0;
-  background: var(--off);
-  z-index: 100;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
+html, body { width: 100%; height: 100%; overflow: hidden; font-family: 'Jost', sans-serif; background: var(--off); color: var(--ink); cursor: none; }
+.cursor { position: fixed; width: 8px; height: 8px; background: var(--ink); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); }
+.cursor-ring { position: fixed; width: 32px; height: 32px; border: 1px solid var(--accent); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%, -50%); transition: left 0.06s ease-out, top 0.06s ease-out; opacity: 0.6; }
+#intro { position: fixed; inset: 0; background: var(--off); z-index: 100; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.8s ease, transform 0.8s ease; }
 #intro.hide { opacity: 0; pointer-events: none; transform: translateY(-20px); }
-
-.intro-name {
-  font-family: 'Cormorant Garamond', serif;
-  font-weight: 300;
-  font-size: clamp(48px, 8vw, 92px);
-  line-height: 0.95;
-  color: var(--ink);
-  text-align: center;
-}
+.intro-name { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(48px, 8vw, 92px); line-height: 0.95; color: var(--ink); text-align: center; }
 .intro-name span { display: block; font-weight: 500; font-style: italic; }
 .intro-rule { width: 1px; height: 48px; background: linear-gradient(to bottom, var(--gold), transparent); margin: 28px auto; }
 .intro-sub { font-size: 9px; font-weight: 300; letter-spacing: 6px; text-transform: uppercase; color: var(--pale); text-align: center; }
-.intro-enter {
-  margin-top: 52px;
-  font-size: 9px; font-weight: 400; letter-spacing: 4px; text-transform: uppercase;
-  color: var(--accent); background: none; border: 1px solid var(--line);
-  padding: 12px 28px; cursor: none; transition: all 0.3s; font-family: 'Jost', sans-serif;
-}
+.intro-enter { margin-top: 52px; font-size: 9px; font-weight: 400; letter-spacing: 4px; text-transform: uppercase; color: var(--accent); background: none; border: 1px solid var(--line); padding: 12px 28px; cursor: none; transition: all 0.3s; font-family: 'Jost', sans-serif; }
 .intro-enter:hover { border-color: var(--gold); color: var(--ink); background: var(--paper); }
-
-/* ── MAIN LAYOUT ── */
-#app {
-  width: 100%; height: 100vh;
-  display: grid;
-  grid-template-columns: 260px 1fr;
-  opacity: 0;
-  transition: opacity 0.8s ease 0.2s;
-}
+#app { width: 100%; height: 100vh; display: grid; grid-template-columns: 260px 1fr; opacity: 0; transition: opacity 0.8s ease 0.2s; }
 #app.visible { opacity: 1; }
-
-/* ── SIDEBAR ── */
-.sidebar {
-  height: 100vh;
-  background: var(--white);
-  border-right: 1px solid var(--line);
-  display: flex;
-  flex-direction: column;
-  padding: 36px 28px;
-  overflow-y: auto;
-  position: relative;
-  z-index: 10;
-}
-.sidebar-logo-name {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 20px; font-weight: 500; color: var(--ink); line-height: 1.1;
-}
-.sidebar-logo-title {
-  font-size: 8px; font-weight: 300; letter-spacing: 3px;
-  text-transform: uppercase; color: var(--pale); margin-top: 6px;
-}
+.sidebar { height: 100vh; background: var(--white); border-right: 1px solid var(--line); display: flex; flex-direction: column; padding: 36px 28px; overflow-y: auto; position: relative; z-index: 10; }
+.sidebar-logo-name { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 500; color: var(--ink); line-height: 1.1; }
+.sidebar-logo-title { font-size: 8px; font-weight: 300; letter-spacing: 3px; text-transform: uppercase; color: var(--pale); margin-top: 6px; }
 .sidebar-rule { height: 1px; background: var(--line); margin: 20px 0; }
 .nav-label { font-size: 7px; font-weight: 500; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
 .nav-list { list-style: none; }
-.nav-item {
-  padding: 9px 0; border-bottom: 1px solid var(--line); cursor: none; transition: all 0.2s;
-}
+.nav-item { padding: 9px 0; border-bottom: 1px solid var(--line); cursor: none; transition: all 0.2s; }
 .nav-item:first-child { border-top: 1px solid var(--line); }
 .nav-item.active .nav-item-name { color: var(--ink); }
 .nav-item.active .nav-item-num { color: var(--accent); }
@@ -132,153 +43,42 @@ html, body {
 .sidebar-bottom { margin-top: auto; padding-top: 20px; border-top: 1px solid var(--line); }
 .sidebar-contact { font-size: 9px; font-weight: 300; color: var(--pale); line-height: 2; }
 .sidebar-contact a { color: var(--accent); text-decoration: none; }
-
-/* ── VIEWER ── */
 .viewer { height: 100vh; position: relative; overflow: hidden; background: var(--off); }
-
-/* ── SLIDES ── */
 .project-slide { position: absolute; inset: 0; opacity: 0; pointer-events: none; transition: opacity 0.7s ease; }
 .project-slide.active { opacity: 1; pointer-events: all; }
-
-/* ── MAIN IMAGE ── */
-.main-image-wrap {
-  position: absolute;
-  inset: 0;
-  background: var(--paper);
-  overflow: hidden;
-}
-.main-image-wrap img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  transition: transform 8s ease;
-}
+.main-image-wrap { position: absolute; inset: 0; background: var(--paper); overflow: hidden; }
+.main-image-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 8s ease; display: block; }
 .project-slide.active .main-image-wrap img { transform: scale(1.04); }
-
-/* ── IMAGE STRIP ── */
-.image-strip {
-  position: absolute;
-  bottom: 80px;
-  left: 28px;
-  display: flex;
-  gap: 6px;
-  z-index: 10;
-  flex-wrap: nowrap;
-  max-width: calc(100% - 56px);
-  overflow-x: auto;
-  padding-bottom: 4px;
-}
-.strip-thumb {
-  width: 52px; height: 38px;
-  border: 2px solid transparent;
-  cursor: none;
-  overflow: hidden;
-  flex-shrink: 0;
-  transition: border-color 0.2s, transform 0.2s;
-  background: var(--paper);
-}
-.strip-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.image-strip { position: absolute; bottom: 80px; left: 28px; display: flex; gap: 6px; z-index: 10; flex-wrap: nowrap; max-width: calc(100% - 56px); overflow-x: auto; padding-bottom: 4px; }
+.strip-thumb { width: 52px; height: 38px; border: 2px solid transparent; cursor: none; overflow: hidden; flex-shrink: 0; transition: border-color 0.2s, transform 0.2s; background: var(--paper); }
+.strip-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .strip-thumb.active-thumb { border-color: var(--gold); }
 .strip-thumb:hover { border-color: var(--pale); transform: scale(1.05); }
-
-/* ── INFO PANEL ── */
-.info-panel {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  padding: 20px 28px 24px;
-  background: linear-gradient(to top, rgba(248,246,243,0.97) 0%, rgba(248,246,243,0.6) 70%, transparent 100%);
-  z-index: 8;
-}
+.info-panel { position: absolute; bottom: 0; left: 0; right: 0; padding: 20px 28px 24px; background: linear-gradient(to top, rgba(248,246,243,0.97) 0%, rgba(248,246,243,0.6) 70%, transparent 100%); z-index: 8; }
 .info-top { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 4px; }
 .project-counter { font-size: 9px; font-weight: 300; letter-spacing: 3px; color: var(--pale); }
 .nav-arrows { display: flex; gap: 10px; }
-.arrow-btn {
-  width: 34px; height: 34px;
-  border: 1px solid var(--line); background: var(--white);
-  display: flex; align-items: center; justify-content: center;
-  cursor: none; transition: all 0.2s; font-size: 14px; color: var(--mid);
-}
+.arrow-btn { width: 34px; height: 34px; border: 1px solid var(--line); background: var(--white); display: flex; align-items: center; justify-content: center; cursor: none; transition: all 0.2s; font-size: 14px; color: var(--mid); }
 .arrow-btn:hover { border-color: var(--gold); color: var(--ink); }
-.project-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 30px; font-weight: 400; color: var(--ink); line-height: 1;
-}
+.project-title { font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 400; color: var(--ink); line-height: 1; }
 .project-meta { display: flex; gap: 16px; margin-top: 5px; flex-wrap: wrap; }
 .meta-item { font-size: 9px; font-weight: 300; letter-spacing: 2px; text-transform: uppercase; color: var(--pale); }
 .meta-dot { font-size: 9px; color: var(--line); align-self: center; }
-
-/* ── TOP BAR ── */
-.top-bar {
-  position: absolute; top: 0; left: 0; right: 0;
-  padding: 18px 28px;
-  display: flex; align-items: center; justify-content: space-between;
-  z-index: 9;
-}
+.top-bar { position: absolute; top: 0; left: 0; right: 0; padding: 18px 28px; display: flex; align-items: center; justify-content: space-between; z-index: 9; }
 .progress-bar { flex: 1; height: 1px; background: var(--line); margin: 0 20px; position: relative; overflow: hidden; }
 .progress-fill { height: 100%; background: var(--gold); transition: width 0.5s ease; }
 .slide-label { font-size: 8px; font-weight: 300; letter-spacing: 3px; text-transform: uppercase; color: var(--pale); }
-
-/* ── NO IMAGE PLACEHOLDER ── */
-.no-image {
-  width: 100%; height: 100%;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  background: var(--paper);
-}
-.no-image-text { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--pale); }
-
-/* ── MOBILE MENU TOGGLE ── */
-.menu-toggle {
-  display: none;
-  position: fixed;
-  top: 16px; left: 16px;
-  z-index: 200;
-  background: var(--white);
-  border: 1px solid var(--line);
-  padding: 8px 12px;
-  font-size: 8px; font-weight: 400; letter-spacing: 3px;
-  text-transform: uppercase; color: var(--mid);
-  font-family: 'Jost', sans-serif;
-  cursor: pointer;
-}
-
-/* ── MOBILE STYLES ── */
+.menu-toggle { display: none; position: fixed; top: 16px; left: 16px; z-index: 200; background: var(--white); border: 1px solid var(--line); padding: 8px 12px; font-size: 8px; font-weight: 400; letter-spacing: 3px; text-transform: uppercase; color: var(--mid); font-family: 'Jost', sans-serif; cursor: pointer; }
 @media (max-width: 768px) {
   html, body { cursor: auto; }
   .cursor, .cursor-ring { display: none; }
-
   #app { grid-template-columns: 1fr; }
-
   .menu-toggle { display: block; }
-
-  .sidebar {
-    position: fixed;
-    top: 0; left: 0;
-    width: 280px;
-    height: 100vh;
-    z-index: 150;
-    transform: translateX(-100%);
-    transition: transform 0.3s ease;
-    box-shadow: 4px 0 20px rgba(0,0,0,0.1);
-  }
-
+  .sidebar { position: fixed; top: 0; left: 0; width: 280px; height: 100vh; z-index: 150; transform: translateX(-100%); transition: transform 0.3s ease; box-shadow: 4px 0 20px rgba(0,0,0,0.1); }
   .sidebar.open { transform: translateX(0); }
-
-  .sidebar-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.3);
-    z-index: 140;
-  }
+  .sidebar-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.3); z-index: 140; }
   .sidebar-overlay.show { display: block; }
-
-  .viewer { height: 100vh; }
-
-  .main-image-wrap img {
-    object-fit: contain;
-    background: var(--ink);
-  }
-
+  .main-image-wrap img { object-fit: contain; background: var(--ink); }
   .image-strip { bottom: 70px; left: 12px; gap: 4px; }
   .strip-thumb { width: 44px; height: 32px; }
   .info-panel { padding: 14px 16px 18px; }
@@ -294,18 +94,16 @@ html, body {
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 
-<!-- INTRO -->
 <div id="intro">
   <h1 class="intro-name">Tamara<span>Podolianko</span></h1>
   <div class="intro-rule"></div>
   <p class="intro-sub">Senior Interior Designer &nbsp;&nbsp;·&nbsp;&nbsp; CG Artist &nbsp;&nbsp;·&nbsp;&nbsp; Master of Architecture</p>
-  <button class="intro-enter" onclick="enterPortfolio()">View Portfolio</button>
+  <button class="intro-enter" id="enterBtn">View Portfolio</button>
 </div>
 
-<!-- MAIN APP -->
 <div id="app">
-  <div class="sidebar-overlay" id="overlay" onclick="closeSidebar()"></div>
-  <button class="menu-toggle" onclick="toggleSidebar()">☰ Projects</button>
+  <div class="sidebar-overlay" id="overlay"></div>
+  <button class="menu-toggle" id="menuToggle">☰ Projects</button>
   <aside class="sidebar" id="sidebar">
     <div>
       <p class="sidebar-logo-name">Tamara<br>Podolianko</p>
@@ -322,196 +120,242 @@ html, body {
       </p>
     </div>
   </aside>
-
   <main class="viewer" id="viewer">
     <div class="top-bar">
       <span class="slide-label" id="slideLabel">Project 01</span>
-      <div class="progress-bar">
-        <div class="progress-fill" id="progressFill"></div>
-      </div>
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
     </div>
     <div id="slides"></div>
   </main>
 </div>
 
 <script>
-const projects = [
-  { id:1, title:'Waterfall',     location:'Europe',      year:'2021',      type:'Residential',       folder:'waterfall',     count:10 },
-  { id:2, title:'Infinity',      location:'Europe',      year:'2021',      type:'Residential',       folder:'infinity',      count:10 },
-  { id:3, title:'Skyline',       location:'Europe',      year:'2022',      type:'Residential',       folder:'skyline',       count:10 },
-  { id:4, title:'Lei',           location:'Europe',      year:'2022',      type:'Residential',       folder:'lei',           count:10 },
-  { id:5, title:'Furs Class',    location:'Philippines', year:'2023',      type:'Commercial',        folder:'furs-class',    count:10 },
-  { id:6, title:'Office',        location:'Philippines', year:'2024',      type:'Commercial',        folder:'office',        count:10 },
-  { id:7, title:'Sun Apartment', location:'USA',         year:'2025',      type:'Residential',       folder:'sun-apartment', count:10 },
-  { id:8, title:'Drawings',      location:'Worldwide',   year:'2021–2026', type:'Technical Drawing', folder:'drawings',      count:10 }
-];
+// ── ALL CODE INSIDE DOMContentLoaded — fixes the DevTools timing bug ──
+document.addEventListener('DOMContentLoaded', function() {
 
-// ── FIX: removed leading slash so paths are relative to portfolio/ folder ──
-function getImages(project) {
-  const imgs = [];
-  for (let i = 1; i <= project.count; i++) {
-   imgs.push(`../${project.folder}/${i}.jpg`);
+  const projects = [
+    { title:'Waterfall',     location:'Europe',      year:'2021',      type:'Residential',       folder:'waterfall',     count:10 },
+    { title:'Infinity',      location:'Europe',      year:'2021',      type:'Residential',       folder:'infinity',      count:10 },
+    { title:'Skyline',       location:'Europe',      year:'2022',      type:'Residential',       folder:'skyline',       count:10 },
+    { title:'Lei',           location:'Europe',      year:'2022',      type:'Residential',       folder:'lei',           count:10 },
+    { title:'Furs Class',    location:'Philippines', year:'2023',      type:'Commercial',        folder:'furs-class',    count:10 },
+    { title:'Office',        location:'Philippines', year:'2024',      type:'Commercial',        folder:'office',        count:10 },
+    { title:'Sun Apartment', location:'USA',         year:'2025',      type:'Residential',       folder:'sun-apartment', count:10 },
+    { title:'Drawings',      location:'Worldwide',   year:'2021–2026', type:'Technical Drawing', folder:'drawings',      count:10 }
+  ];
+
+  // Images are in root folders, one level up from /portfolio/
+  function imgSrc(folder, num) {
+    return '../' + folder + '/' + num + '.jpg';
   }
-  return imgs;
-}
 
-let currentProject = 0;
-let currentImage = 0;
+  let currentProject = 0;
+  let currentImage = 0;
 
-// ── CURSOR ──
-const cursor = document.getElementById('cursor');
-const ring = document.getElementById('cursorRing');
-document.addEventListener('mousemove', e => {
-  cursor.style.left = e.clientX + 'px';
-  cursor.style.top = e.clientY + 'px';
-  ring.style.left = e.clientX + 'px';
-  ring.style.top = e.clientY + 'px';
-});
-
-// ── INTRO ──
-function enterPortfolio() {
-  document.getElementById('intro').classList.add('hide');
-  document.getElementById('app').classList.add('visible');
-  buildNav();
-  buildSlides();
-  goToProject(0);
-}
-
-// ── NAV ──
-function buildNav() {
-  const nav = document.getElementById('navList');
-  nav.innerHTML = '';
-  projects.forEach((p, i) => {
-    const li = document.createElement('li');
-    li.className = 'nav-item';
-    li.id = 'nav-' + i;
-    li.innerHTML = `
-      <div class="nav-item-inner" onclick="goToProject(${i})">
-        <span class="nav-item-num">${String(i+1).padStart(2,'0')}</span>
-        <span class="nav-item-name">${p.title}</span>
-      </div>
-      <div class="nav-item-type">${p.type}</div>
-    `;
-    nav.appendChild(li);
+  // ── CURSOR ──
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  document.addEventListener('mousemove', function(e) {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top  = e.clientY + 'px';
+    ring.style.left   = e.clientX + 'px';
+    ring.style.top    = e.clientY + 'px';
   });
-}
 
-// ── SLIDES ──
-function buildSlides() {
-  const container = document.getElementById('slides');
-  container.innerHTML = '';
-
-  projects.forEach((p, i) => {
-    const images = getImages(p);
-    const slide = document.createElement('div');
-    slide.className = 'project-slide';
-    slide.id = 'slide-' + i;
-
-    const wrap = document.createElement('div');
-    wrap.className = 'main-image-wrap';
-    const mainImg = document.createElement('img');
-    mainImg.src = images[0];
-    mainImg.id = 'mainImg-' + i;
-    mainImg.alt = p.title;
-    mainImg.onerror = function() { this.style.display='none'; };
-    wrap.appendChild(mainImg);
-    slide.appendChild(wrap);
-
-    const strip = document.createElement('div');
-    strip.className = 'image-strip';
-    strip.id = 'strip-' + i;
-    images.forEach((src, j) => {
-      const thumb = document.createElement('div');
-      thumb.className = 'strip-thumb' + (j === 0 ? ' active-thumb' : '');
-      const tImg = document.createElement('img');
-      tImg.src = src;
-      tImg.alt = '';
-      tImg.onerror = function() { thumb.style.display='none'; };
-      thumb.appendChild(tImg);
-      thumb.onclick = () => showImage(i, j, src);
-      strip.appendChild(thumb);
-    });
-    slide.appendChild(strip);
-
-    const infoPanel = document.createElement('div');
-    infoPanel.className = 'info-panel';
-    infoPanel.innerHTML = `
-      <div class="info-top">
-        <span class="project-counter" id="counter-${i}">1 / ${p.count}</span>
-        <div class="nav-arrows">
-          <button class="arrow-btn" onclick="prevProject()">←</button>
-          <button class="arrow-btn" onclick="nextProject()">→</button>
-        </div>
-      </div>
-      <div class="project-title">${p.title}</div>
-      <div class="project-meta">
-        <span class="meta-item">${p.location}</span>
-        <span class="meta-dot">·</span>
-        <span class="meta-item">${p.year}</span>
-        <span class="meta-dot">·</span>
-        <span class="meta-item">${p.type}</span>
-      </div>
-    `;
-    slide.appendChild(infoPanel);
-    container.appendChild(slide);
+  // ── ENTER BUTTON ──
+  document.getElementById('enterBtn').addEventListener('click', function() {
+    document.getElementById('intro').classList.add('hide');
+    document.getElementById('app').classList.add('visible');
+    buildNav();
+    buildSlides();
+    goToProject(0);
   });
-}
 
-// ── SHOW IMAGE ──
-function showImage(projIdx, imgIdx, src) {
-  const mainImg = document.getElementById('mainImg-' + projIdx);
-  if (mainImg) mainImg.src = src;
-  currentImage = imgIdx;
+  // ── MOBILE TOGGLE ──
+  document.getElementById('menuToggle').addEventListener('click', toggleSidebar);
+  document.getElementById('overlay').addEventListener('click', closeSidebar);
 
-  const strip = document.getElementById('strip-' + projIdx);
-  if (strip) {
-    strip.querySelectorAll('.strip-thumb').forEach((t, i) => {
-      t.classList.toggle('active-thumb', i === imgIdx);
+  // ── BUILD NAV ──
+  function buildNav() {
+    const nav = document.getElementById('navList');
+    nav.innerHTML = '';
+    projects.forEach(function(p, i) {
+      const li = document.createElement('li');
+      li.className = 'nav-item';
+      li.id = 'nav-' + i;
+      li.innerHTML =
+        '<div class="nav-item-inner">' +
+          '<span class="nav-item-num">' + String(i+1).padStart(2,'0') + '</span>' +
+          '<span class="nav-item-name">' + p.title + '</span>' +
+        '</div>' +
+        '<div class="nav-item-type">' + p.type + '</div>';
+      li.querySelector('.nav-item-inner').addEventListener('click', function() {
+        goToProject(i);
+      });
+      nav.appendChild(li);
     });
   }
 
-  const counter = document.getElementById('counter-' + projIdx);
-  if (counter) counter.textContent = `${imgIdx + 1} / ${projects[projIdx].count}`;
-}
+  // ── BUILD SLIDES ──
+  function buildSlides() {
+    const container = document.getElementById('slides');
+    container.innerHTML = '';
 
-// ── NAVIGATION ──
-function goToProject(idx) {
-  document.querySelectorAll('.project-slide').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    projects.forEach(function(p, i) {
+      const slide = document.createElement('div');
+      slide.className = 'project-slide';
+      slide.id = 'slide-' + i;
 
-  currentProject = idx;
-  currentImage = 0;
+      // Main image wrapper
+      const wrap = document.createElement('div');
+      wrap.className = 'main-image-wrap';
+      const mainImg = document.createElement('img');
+      mainImg.id  = 'mainImg-' + i;
+      mainImg.alt = p.title;
+      // No src yet — loaded on demand in goToProject()
+      wrap.appendChild(mainImg);
+      slide.appendChild(wrap);
 
-  const slide = document.getElementById('slide-' + idx);
-  if (slide) slide.classList.add('active');
+      // Thumbnail strip
+      const strip = document.createElement('div');
+      strip.className = 'image-strip';
+      strip.id = 'strip-' + i;
+      for (var j = 0; j < p.count; j++) {
+        (function(thumbIdx) {
+          const thumb = document.createElement('div');
+          thumb.className = 'strip-thumb' + (thumbIdx === 0 ? ' active-thumb' : '');
+          const tImg = document.createElement('img');
+          tImg.alt = '';
+          tImg.setAttribute('data-src', imgSrc(p.folder, thumbIdx + 1));
+          tImg.onerror = function() { thumb.style.display = 'none'; };
+          thumb.appendChild(tImg);
+          thumb.addEventListener('click', function() {
+            showImage(i, thumbIdx);
+          });
+          strip.appendChild(thumb);
+        })(j);
+      }
+      slide.appendChild(strip);
 
-  const navItem = document.getElementById('nav-' + idx);
-  if (navItem) navItem.classList.add('active');
+      // Info panel
+      const info = document.createElement('div');
+      info.className = 'info-panel';
+      info.innerHTML =
+        '<div class="info-top">' +
+          '<span class="project-counter" id="counter-' + i + '">1 / ' + p.count + '</span>' +
+          '<div class="nav-arrows">' +
+            '<button class="arrow-btn" id="prevBtn-' + i + '">←</button>' +
+            '<button class="arrow-btn" id="nextBtn-' + i + '">→</button>' +
+          '</div>' +
+        '</div>' +
+        '<div class="project-title">' + p.title + '</div>' +
+        '<div class="project-meta">' +
+          '<span class="meta-item">' + p.location + '</span>' +
+          '<span class="meta-dot">·</span>' +
+          '<span class="meta-item">' + p.year + '</span>' +
+          '<span class="meta-dot">·</span>' +
+          '<span class="meta-item">' + p.type + '</span>' +
+        '</div>';
+      slide.appendChild(info);
+      container.appendChild(slide);
 
-  document.getElementById('progressFill').style.width = ((idx + 1) / projects.length * 100) + '%';
-  document.getElementById('slideLabel').textContent = 'Project ' + String(idx + 1).padStart(2, '0');
+      // Add arrow listeners after appending (so elements exist in DOM)
+      document.getElementById('prevBtn-' + i).addEventListener('click', prevProject);
+      document.getElementById('nextBtn-' + i).addEventListener('click', nextProject);
+    });
+  }
 
-  if (navItem) navItem.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-  closeSidebar();
-}
+  // ── LOAD IMAGES ON DEMAND ──
+  function loadProjectImages(idx) {
+    var p = projects[idx];
 
-function nextProject() { goToProject((currentProject + 1) % projects.length); }
-function prevProject() { goToProject((currentProject - 1 + projects.length) % projects.length); }
+    // Main image
+    var mainImg = document.getElementById('mainImg-' + idx);
+    if (mainImg && !mainImg.getAttribute('src')) {
+      mainImg.src = imgSrc(p.folder, 1);
+    }
 
-function toggleSidebar() {
-  document.getElementById('sidebar').classList.toggle('open');
-  document.getElementById('overlay').classList.toggle('show');
-}
+    // Thumbnails
+    var strip = document.getElementById('strip-' + idx);
+    if (strip) {
+      var thumbImgs = strip.querySelectorAll('img[data-src]');
+      thumbImgs.forEach(function(img) {
+        img.src = img.getAttribute('data-src');
+        img.removeAttribute('data-src');
+      });
+    }
+  }
 
-function closeSidebar() {
-  document.getElementById('sidebar').classList.remove('open');
-  document.getElementById('overlay').classList.remove('show');
-}
+  // ── SHOW SPECIFIC IMAGE ──
+  function showImage(projIdx, imgIdx) {
+    var p = projects[projIdx];
+    var mainImg = document.getElementById('mainImg-' + projIdx);
+    if (mainImg) {
+      mainImg.src = imgSrc(p.folder, imgIdx + 1);
+    }
+    currentImage = imgIdx;
 
-document.addEventListener('keydown', e => {
-  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') nextProject();
-  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') prevProject();
-});
+    var strip = document.getElementById('strip-' + projIdx);
+    if (strip) {
+      strip.querySelectorAll('.strip-thumb').forEach(function(t, i) {
+        t.classList.toggle('active-thumb', i === imgIdx);
+      });
+    }
+
+    var counter = document.getElementById('counter-' + projIdx);
+    if (counter) counter.textContent = (imgIdx + 1) + ' / ' + p.count;
+  }
+
+  // ── NAVIGATE PROJECTS ──
+  function goToProject(idx) {
+    document.querySelectorAll('.project-slide').forEach(function(s) { s.classList.remove('active'); });
+    document.querySelectorAll('.nav-item').forEach(function(n) { n.classList.remove('active'); });
+
+    currentProject = idx;
+    currentImage   = 0;
+
+    var slide = document.getElementById('slide-' + idx);
+    if (slide) slide.classList.add('active');
+
+    var navItem = document.getElementById('nav-' + idx);
+    if (navItem) {
+      navItem.classList.add('active');
+      navItem.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    }
+
+    document.getElementById('progressFill').style.width = ((idx + 1) / projects.length * 100) + '%';
+    document.getElementById('slideLabel').textContent = 'Project ' + String(idx + 1).padStart(2, '0');
+
+    // Load current project images immediately
+    loadProjectImages(idx);
+
+    // Preload next project after a short delay
+    setTimeout(function() {
+      loadProjectImages((idx + 1) % projects.length);
+    }, 800);
+
+    closeSidebar();
+  }
+
+  function nextProject() { goToProject((currentProject + 1) % projects.length); }
+  function prevProject() { goToProject((currentProject - 1 + projects.length) % projects.length); }
+
+  function toggleSidebar() {
+    document.getElementById('sidebar').classList.toggle('open');
+    document.getElementById('overlay').classList.toggle('show');
+  }
+  function closeSidebar() {
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('overlay').classList.remove('show');
+  }
+
+  // ── KEYBOARD ──
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') nextProject();
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   prevProject();
+  });
+
+}); // end DOMContentLoaded
 </script>
 </body>
 </html>
