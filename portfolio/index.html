@@ -221,13 +221,14 @@ function buildSlides() {
         '</div>' +
       '</div>' +
       '<div class="project-title">' + p.title + '</div>' +
-      '<div class="project-meta">' +
-        '<span class="meta-item">' + p.location + '</span>' +
-        '<span class="meta-dot">·</span>' +
-        '<span class="meta-item">' + p.year + '</span>' +
-        '<span class="meta-dot">·</span>' +
-        '<span class="meta-item">' + p.type + '</span>' +
-      '</div>';
+     '<div class="project-meta">' +
+  '<span class="meta-item">' + p.location + '</span>' +
+  '<span class="meta-dot">·</span>' +
+  '<span class="meta-item">' + p.year + '</span>' +
+  '<span class="meta-dot">·</span>' +
+  '<span class="meta-item">' + p.type + '</span>' +
+'</div>' +
+(i === 6 ? '<div style="font-size:9px;font-weight:300;letter-spacing:2px;text-transform:uppercase;color:#9a7d56;margin-top:5px;">In collaboration with EuroHome Interiors</div>' : '');
     slide.appendChild(info);
     container.appendChild(slide);
   }
